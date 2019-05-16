@@ -5,6 +5,17 @@ case $- in
       *) return;;
 esac
 
+case $(uname -s) in 
+"Darwin")
+  is_darwin=yes
+  ;;
+"Linux")
+  is_linux=yes
+  ;;
+*)
+  ;;
+esac
+
 # History control
 # See bash(1) for more options
 
@@ -82,8 +93,15 @@ if ! shopt -oq posix; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ $is_darwin ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+else
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 export PATH=$HOME/.cargo/bin:$PATH:$HOME/.netlify/helper/bin
 eval "$(direnv hook bash)"
