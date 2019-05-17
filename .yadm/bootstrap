@@ -2,16 +2,20 @@
 
 case $(uname -s) in 
 "Darwin")
+  OS=Darwin
   is_darwin=yes
   ;;
 "Linux")
+  OS=Linux
   is_linux=yes
+  if [[ -f /mnt/c/WINDOWS/system32/wslconfig.exe ]];
+  then
+    is_wsl=yes
+  fi
   ;;
 *)
   ;;
-esac
-
-OS=$(uname -s)
+esac;
 
 # Homebrew
 
@@ -33,17 +37,9 @@ fi
 # Linux packages
 
 if [ $is_linux ]; then
-   if [ ! -f /etc/apt/sources.list.d/git-core-ubuntu-ppa-bionic.list ]
+  if [ ! -f /etc/apt/sources.list.d/git-core-ubuntu-ppa-bionic.list ]
   then
     sudo add-apt-repository ppa:git-core/ppa
-  fi
-
-  sudo apt-get update
-  sudo apt-get upgrade -y
-
-  if test ! $(which git)
-  then
-    sudo apt-get install -y git
   fi
 
   if [ ! -f /etc/apt/sources.list.d/github_git-lfs.list ]
@@ -51,19 +47,20 @@ if [ $is_linux ]; then
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
   fi
 
-  if test ! $(which git-lfs)
-  then
-    sudo apt-get install -y git-lfs
-    git lfs install
-  fi
+  sudo apt-get update
+  sudo apt-get upgrade -y
+
+  sudo apt-get install -y \
+    git \
+    git-lfs \
+    jq \
+    direnv
 
   if test ! $(which az)
   then
     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
   fi
   
-  sudo apt-get install -y jq direnv
-
   if [ ! -d ~/.nvm ]
   then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
@@ -71,14 +68,7 @@ if [ $is_linux ]; then
   fi
 fi
 
-# Source code folder index blocker
-
-if [ $is_darwin ]; then
-  mkdir -p ~/Source
-  touch ~/Source/.metadata_never_index
-fi
-
-
+# Node-based tools
 
 if test ! $(which eslint)
 then
@@ -105,16 +95,26 @@ then
   npm install -g prettier
 fi
 
-if [ ! -f ~/.cargo/bin/rustup ]
-then
-  curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path
-fi
-
 if test ! $(which tsc)
 then
   npm install -g typescript
 fi
 
+# Rust
+
+if [ ! -f ~/.cargo/bin/rustup ]
+then
+  curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path
+fi
+
+# Source code folder index blocker
+
+if [ $is_darwin ]; then
+  mkdir -p ~/Source
+  touch ~/Source/.metadata_never_index
+fi
+
+# MacOS Preferences
 
 if [ $is_darwin ]; then
   osascript -e 'tell application "System Preferences" to quit'
