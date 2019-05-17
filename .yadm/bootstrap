@@ -54,7 +54,8 @@ if [ $is_linux ]; then
     git \
     git-lfs \
     jq \
-    direnv
+    direnv \
+    htop
 
   if test ! $(which az)
   then
