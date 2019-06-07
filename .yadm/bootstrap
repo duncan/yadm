@@ -61,13 +61,15 @@ if [ $is_linux ]; then
   then
     curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
   fi
-  
-  if [ ! -d ~/.nvm ]
+fi
+
+if [ ! -d ~/.nvm ]
   then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     nvm install --lts
   fi
-fi
 
 # Node-based tools
 
