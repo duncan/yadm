@@ -8,9 +8,6 @@
   name = Duncan Davidson
   email = duncandavidson@me.com
 
-[credential]
-  helper = netlify
-
 [include]
+  path = /Users/duncan/.netlify/helper/git-config
   path = .gitconfig.local
-
