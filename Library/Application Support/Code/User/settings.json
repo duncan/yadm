@@ -1,0 +1,20 @@
+{
+    "sync.gist": "7499e2f6cc0ed286cf8cb81bfd8db20e",
+    "editor.fontFamily": "'Fira Code', 'Fira Mono', Menlo, Monaco, 'Courier New', monospace",
+    "workbench.colorTheme": "Visual Studio Light",
+    "editor.minimap.enabled": false,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "breadcrumbs.enabled": true,
+    "git.autofetch": true,
+    "editor.fontLigatures": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.enableSmartCommit": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.fontSize": 12
+}
