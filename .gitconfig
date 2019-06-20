@@ -9,5 +9,4 @@
   email = duncandavidson@me.com
 
 [include]
-  path = /Users/duncan/.netlify/helper/git-config
   path = .gitconfig.local
