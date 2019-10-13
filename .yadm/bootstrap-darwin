@@ -1,0 +1,59 @@
+#!/bin/bash
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Installing homebrew"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+brew upgrade
+brew update
+
+if [ -f "$HOME/.Brewfile" ]; then
+  echo "Updating homebrew bundle"
+  brew bundle --global
+fi
+
+# Source code folder index blocker
+mkdir -p ~/Source
+touch ~/Source/.metadata_never_index
+
+
+osascript -e 'tell application "System Preferences" to quit'
+
+# Screen Saver Lock
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Turn on Firewall
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+sudo launchctl load /System/Library/LaunchDaemons/com.apple.alf.agent.plist 2>/dev/null
+
+# Dock
+defaults write com.apple.dock autohide -bool true
+
+# Image Capture
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+# Finder
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Time Machine
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Safari
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+
+# FileVault
+if [[ `fdesetup status` != "FileVault is On." ]]
+then
+echo "⛔️ FileVault will be enabled."
+sudo fdsetup enable -user $USER  | tee ~/Desktop/"FileVault Recovery Key.txt"
+fi
+
+LOGIN_TEXT="Found this computer? Please contact Duncan Davidson at duncandavidson@me.com"
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "$LOGIN_TEXT"
+
+echo "You may need to log out/in for some MacOS settings to take effect"
