@@ -8,7 +8,7 @@ You can use this as is, but really you'll probably want to put the time into eit
 
 ## Usage (if you are @duncan)
 
-To boot up a new system, install yadm somehow reasonable, then use it to grab the dotfiles repo and install them. For example, on Linux:
+To boot up a new system, install yadm somehow reasonable, then use it to grab the dotfiles repo and install them. For example, on Ubuntu Linux (including using the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)):
 
 ```
 sudo apt-get install yadm
