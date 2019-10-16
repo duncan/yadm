@@ -14,9 +14,11 @@ To boot up a new system, install yadm somehow reasonable, then use it to grab th
 sudo apt-get install yadm
 ~/.yadm-project/yadm clone https://github.com/duncan/dotfiles
 ```
-On MacOS X with [Homebrew](https://brew.sh):
+
+On MacOS X, installing [Homebrew](https://brew.sh) first:
 
 ```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install yadm
 ~/.yadm-project/yadm clone https://github.com/duncan/dotfiles
 ```
