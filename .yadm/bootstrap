@@ -24,46 +24,6 @@ case $(uname -s) in
     ;;
 esac;
 
-if [ ! -d ~/.nvm ]
-then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  nvm install --lts
-fi
-
-# Node-based tools
-
-if test ! $(which eslint)
-then
-  npm install -g eslint
-fi
-
-if test ! $(which func)
-then
-  npm install -g azure-functions-core-tools --unsafe-perm true
-fi
-
-if test ! $(which netlify)
-then
-  npm install -g netlify-cli
-fi
-
-if test ! -f ~/.netlify/helper/bin/git-credential-netlify
-then
-  netlify plugins:install netlify-lm-plugin
-fi
-
-if test ! $(which prettier)
-then
-  npm install -g prettier
-fi
-
-if test ! $(which tsc)
-then
-  npm install -g typescript
-fi
-
 # Rust
 
 if [ ! -f ~/.cargo/bin/rustup ]

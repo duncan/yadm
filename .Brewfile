@@ -7,6 +7,7 @@ brew "git"
 brew "git-lfs"
 brew "hub"
 brew "jq"
+brew "node"
 
 if (/darwin/ =~ RUBY_PLATFORM) != nil 
   brew "mas"
