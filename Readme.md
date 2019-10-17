@@ -20,5 +20,5 @@ On MacOS X, installing [Homebrew](https://brew.sh) first:
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install yadm
-~/.yadm-project/yadm clone https://github.com/duncan/dotfiles
+yadm clone https://github.com/duncan/dotfiles
 ```
