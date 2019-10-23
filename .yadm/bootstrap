@@ -24,6 +24,10 @@ case $(uname -s) in
     ;;
 esac;
 
+# Node
+
+`dirname $0`/bootstrap-node
+
 # Rust
 
 if [ ! -f ~/.cargo/bin/rustup ]

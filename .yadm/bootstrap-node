@@ -1,13 +1,19 @@
 #!/bin/bash
 
+if test ! -d $HOME/.nvm
+then
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
+  source .nvm/nvm.sh
+fi
+
+if test ! $(which node)
+then
+  nvm install node
+fi
+
 if test ! $(which eslint)
 then
   npm install -g eslint
-fi
-
-if test ! $(which func)
-then
-  npm install -g azure-functions-core-tools --unsafe-perm true
 fi
 
 if test ! $(which netlify)
