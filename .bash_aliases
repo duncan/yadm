@@ -8,7 +8,6 @@ fi
 
 if [[ -f /mnt/c/WINDOWS/system32/wslconfig.exe ]];
 then
-  alias code=code-insiders
   alias choco=choco.exe
 fi
 
