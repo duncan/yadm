@@ -5,7 +5,7 @@ fi
 autoload -Uz compinit promptinit
 compinit
 promptinit
-PS1="$ "
+PROMPT="%~ $ "
 
 zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
@@ -19,3 +19,4 @@ zle -N down-line-or-beginning-search
 
 typeset -U path
 export PATH=$HOME/bin:$HOME/.nvm/versions/node/v10.16.0/bin:$HOME/.cargo/bin:$HOME/.netlify/helper/bin:$PATH
+eval "$(direnv hook zsh)"
