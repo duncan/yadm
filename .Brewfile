@@ -19,6 +19,7 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   cask "notion"
   cask "deckset"
   cask "numi" 
+  cask "microsoft-teams"
 
   mas "Speedtest", id: 1153157709
   mas "Ulysses", id: 1225570693
