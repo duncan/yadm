@@ -1,14 +1,9 @@
 #!/bin/bash
 
-if test ! -d $HOME/.nvm
-then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
-  source .nvm/nvm.sh
-fi
-
 if test ! $(which node)
 then
-  nvm install node
+  echo "Node must be installed!"
+  exit
 fi
 
 if test ! $(which eslint)
