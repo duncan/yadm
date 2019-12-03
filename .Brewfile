@@ -17,6 +17,7 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   cask "deckset"
   cask "numi" 
   cask "microsoft-teams"
+  cask "vlc"
 
   mas "Speedtest", id: 1153157709
   mas "Ulysses", id: 1225570693
@@ -30,5 +31,8 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   mas "Reeder", id: 1449412482
   mas "Xcode", id: 497799835
   mas "Blackmagic Disk Speed Test", id: 425264550
-  max "Day One", id: 1055511498
+  mas "Day One", id: 1055511498
+  mas "Final Cut Pro", id: 424389933
+  mas "Motion", id: 434290957
+  mas "Compressor", id: 424390742
 end
