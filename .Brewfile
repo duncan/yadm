@@ -7,6 +7,7 @@ brew "git"
 brew "git-lfs"
 brew "jq"
 brew "vips"
+brew "node"
 
 if (/darwin/ =~ RUBY_PLATFORM) != nil 
   brew "mas"
@@ -27,4 +28,6 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   mas "WiFi Explorer", id: 494803304
   mas "Slack", id: 803453959
   mas "Reeder", id: 1449412482
+  # mas "Xcode", id: 497799835
+  mas "Blackmagic Disk Speed Test", id: 425264550
 end

@@ -1,38 +1,83 @@
 #!/bin/bash
 
+echo "Some portions of this script require sudo, getting that now"
+sudo echo "Got sudo. Thanks."
+
+# MacOS X bootstrap
+setup_darwin() {
+  brew upgrade
+  brew update
+  brew bundle --global # depends on ~/.Brewfile
+  mkdir -p ~/Source
+  touch ~/Source/.metadata_never_index
+  osascript -e 'tell application "System Preferences" to quit'
+  defaults write com.apple.screensaver askForPassword -int 1
+  defaults write com.apple.screensaver askForPasswordDelay -int 0
+  sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+  sudo launchctl load /System/Library/LaunchDaemons/com.apple.alf.agent.plist 2>/dev/null
+  defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+  defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+  defaults write com.apple.dock autohide -bool true
+  defaults write com.apple.finder AppleShowAllFiles -bool true
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+  defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+  LOGIN_TEXT="Found this computer? Please contact Duncan Davidson at duncandavidson@me.com"
+  sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "$LOGIN_TEXT"
+}
+
+# Ubuntu bootstrap
+setup_ubuntu() {
+  if [ ! -f /etc/apt/sources.list.d/git-core-ubuntu-ppa-bionic.list ]
+  then
+    sudo add-apt-repository ppa:git-core/ppa
+  fi
+
+  if [ ! -f /etc/apt/sources.list.d/github_git-lfs.list ]
+  then
+    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+  fi
+
+  sudo apt-get update
+  sudo apt-get upgrade -y
+  sudo apt-get install -y git git-lfs jq direnv htop
+
+  if test ! $(which az)
+  then
+    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  fi
+}
+
+# Windows Subsystem for Linux (WSL) bootstrap
+setup_wsl() {
+  echo "Oh hai WSL"
+}
+
 case $(uname -s) in 
   "Darwin")
-    set is_darwin = 1
-    echo "Executing `dirname $0`/bootstrap-darwin"
-    `dirname $0`/bootstrap-darwin
+    setup_darwin
     ;;
   "Linux")
-    set is_linux = 1
     if test -f /usr/bin/lsb_release
     then
-      echo "Executing `dirname $0`/bootstrap-ubuntu"
-      `dirname $0`/bootstrap-ubuntu
+      setup_ubuntu
     fi
     if test -f /mnt/c/Windows/System32/wslconfig.exe
     then
-      set is_wsl = 1
-      echo "Executing `dirname $0`/bootstrap-wsl"
-      `dirname $0`/bootstrap-wsl
+      setup_wsl
     fi
     ;;
   *)
     ;;
 esac;
 
-# Node
-
-`dirname $0`/bootstrap-node
+# Various node tools that I like to have around
+npm install -g eslint prettier typescript
 
 # Rust
-
 if [ ! -f ~/.cargo/bin/rustup ]
 then
   curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path
 fi
 
-
+echo "You may need to log out/in or restart for settings to take effect on MacOS"
