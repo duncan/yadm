@@ -28,6 +28,7 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   mas "WiFi Explorer", id: 494803304
   mas "Slack", id: 803453959
   mas "Reeder", id: 1449412482
-  # mas "Xcode", id: 497799835
+  mas "Xcode", id: 497799835
   mas "Blackmagic Disk Speed Test", id: 425264550
+  max "Day One", id: 1055511498
 end
