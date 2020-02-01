@@ -12,6 +12,7 @@ brew "node"
 if (/darwin/ =~ RUBY_PLATFORM) != nil 
   brew "mas"
   cask "font-cascadia"
+  cask "font-jetbrains-mono"
   cask "visual-studio-code"
   cask "notion"
   cask "deckset"
