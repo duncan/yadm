@@ -13,7 +13,8 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   brew "mas"
   cask "font-cascadia"
   cask "font-jetbrains-mono"
-  cask "visual-studio-code"
+  cask "adobe-creative-cloud"
+  cask "visual-studio-code-insiders"
   cask "notion"
   cask "deckset"
   cask "numi" 
@@ -32,7 +33,6 @@ if (/darwin/ =~ RUBY_PLATFORM) != nil
   mas "Reeder", id: 1449412482
   mas "Xcode", id: 497799835
   mas "Blackmagic Disk Speed Test", id: 425264550
-  mas "Day One", id: 1055511498
   mas "Final Cut Pro", id: 424389933
   mas "Motion", id: 434290957
   mas "Compressor", id: 424390742
